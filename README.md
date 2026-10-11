@@ -1,54 +1,54 @@
 # md2notes
 
-Une petite application Mac pour convertir le Markdown du presse-papiers en texte mis en forme, prêt à coller dans Apple Notes.
+A small Mac app that converts Markdown from your clipboard into formatted text, ready to paste into Apple Notes.
 
-Utile pour copier-coller les réponses de **ChatGPT, Claude et d’autres IA** dans Apple Notes, en conservant la mise en forme et des espaces entre les paragraphes.
+Useful for copying and pasting responses from **ChatGPT, Claude, and other AI assistants** into Apple Notes while keeping formatting and readable spacing between paragraphs.
 
-**Copier → cliquer sur md2notes dans la barre des menus → coller avec ⌘V.**
+**Copy → click md2notes in the menu bar → paste with ⌘V.**
 
-## Fonctionnalités
+## Features
 
-- Conversion des titres `#`, du gras `**`/`__`, de l’italique `*`/`_`, du texte barré `~~`, des liens, citations, listes et tableaux.
-- Ajout d’une vraie ligne vide entre les paragraphes, sans doubler les espacements existants.
-- Conservation du contenu des blocs de code et des caractères littéraux.
-- Lecture des fichiers `.md` ou `.markdown` copiés depuis le Finder, ouverts avec l’application ou choisis dans son menu.
-- Restauration du presse-papiers original par clic droit, jusqu’à la prochaine copie.
-- Traitement local, sans serveur et sans historique enregistré.
+- Converts headings `#`, bold `**`/`__`, italics `*`/`_`, strikethrough `~~`, links, blockquotes, lists, and tables.
+- Adds a real blank line between paragraphs without duplicating existing spacing.
+- Preserves code block contents and literal characters.
+- Reads `.md` or `.markdown` files copied from Finder, opened with the app, or selected through its menu.
+- Restores the original clipboard through the right-click menu until you copy something else.
+- Processes everything locally, with no server and no saved clipboard history.
 
-Version actuelle : **1.2**. Les fichiers Markdown doivent être en UTF-8 et faire moins de 5 Mo. Les images et pièces jointes ne sont pas converties. Le rendu visuel dans Notes Mac/iPhone reste à confirmer ; les contrôles automatisés vérifient les sorties HTML/RTF et le presse-papiers.
+Current version: **1.2**. Markdown files must use UTF-8 encoding and be no larger than 5 MB. Images and attachments are not converted. Visual rendering in Notes on Mac and iPhone still needs confirmation; automated checks validate the HTML/RTF output and clipboard behavior.
 
-## Construire et tester
+## Build and test
 
-Requiert macOS 13 ou ultérieur et les outils de compilation Swift/Xcode. L’application actuelle cible les **Mac Intel**. Les dépendances nécessaires à l’exécution sont incluses dans le dépôt.
+Requires macOS 13 or later and the Swift/Xcode command-line tools. The current build targets **Intel Macs**. All runtime dependencies are included in the repository.
 
 ```sh
 zsh scripts/build.sh
 open build/md2notes.app
 ```
 
-La construction signe l’application localement, vérifie la signature et exécute les tests. Aucun certificat de développeur n’est nécessaire pour cet usage local. L’application n’est pas notarisée.
+The build signs the app locally, verifies the signature, and runs the tests. No developer certificate is required for local use. The app is not notarized.
 
-Pour créer l’archive distribuable :
+To create a distributable archive:
 
 ```sh
 ditto -c -k --sequesterRsrc --keepParent build/md2notes.app build/md2notes-macOS.zip
 ```
 
-Pour relancer uniquement les tests :
+To run the tests again without rebuilding:
 
 ```sh
 build/md2notes.app/Contents/MacOS/md2notes --self-test
 ```
 
-## Organisation
+## Repository layout
 
-- `src/` : application native, presse-papiers et détection Markdown.
-- `resources/` : description de l’application et transformation HTML.
-- `tests/` : contrôles automatisés et exemple Markdown.
-- `vendor/marked/` : parseur Markdown fourni localement et sa licence MIT.
-- `scripts/` : construction reproductible.
-- `docs/guide.md` : guide d’utilisation.
+- `src/`: native app, clipboard handling, and Markdown detection.
+- `resources/`: app metadata and HTML transformation.
+- `tests/`: automated checks and a sample Markdown file.
+- `vendor/marked/`: bundled Markdown parser and its MIT license.
+- `scripts/`: reproducible build script.
+- `docs/guide.md`: user guide.
 
-Les tests utilisent un presse-papiers isolé pour les opérations d’écriture et de restauration. Ils peuvent également lire le presse-papiers réel pour un contrôle de conversion, sans le modifier ni afficher son contenu.
+The tests use an isolated clipboard for write and restore operations. They may also read the system clipboard to check conversion without changing it or printing its contents.
 
-Consultez [le guide d’utilisation](docs/guide.md) pour les détails et limites.
+See the [user guide](docs/guide.md) for details and limitations.

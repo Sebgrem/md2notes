@@ -1,48 +1,56 @@
 # md2notes
 
-md2notes convertit le Markdown en texte mis en forme pour Notes et ajoute une ligne vide entre les paragraphes. Il sait également aérer du texte déjà mis en forme.
+md2notes converts Markdown into formatted text for Notes and adds a blank line between paragraphs. It can also add spacing to text that is already formatted.
 
-## Démarrer
+## Getting started
 
-Ouvrez **md2notes.app**. Une icône représentant des lignes de texte apparaît dans la barre des menus du Mac. L’application n’a pas de fenêtre principale et n’apparaît pas dans le Dock.
+Open **md2notes.app**. An icon showing text lines appears in your Mac’s menu bar. The app has no main window and does not appear in the Dock.
 
-Vous pouvez déplacer md2notes.app dans votre dossier Applications. md2notes ne se lance pas automatiquement au démarrage du Mac.
+You can move md2notes.app into your Applications folder. md2notes does not start automatically when you log in.
 
-## Utiliser
+## Using md2notes
 
-1. Copiez une réponse dans ChatGPT, du texte Markdown ou un fichier `.md` depuis le Finder.
-2. Cliquez sur l’icône md2notes dans la barre des menus.
-3. Une coche confirme que le texte est prêt.
-4. Collez dans Notes avec **⌘V**.
+1. Copy a response from ChatGPT, Claude, or another AI assistant, some Markdown text, or a `.md` file from Finder.
+2. Click the md2notes icon in the menu bar.
+3. A checkmark confirms that the text is ready.
+4. Paste into Notes with **⌘V**.
 
-Dans Notes, utilisez un dossier du compte iCloud pour retrouver la note sur votre iPhone.
+In Notes, use a folder in your iCloud account to access the note on your iPhone.
 
-Un **clic droit** sur l’icône permet de **convertir un fichier Markdown…**, de **restaurer le presse-papiers original** ou de **quitter md2notes**. La restauration n’est disponible que tant que vous n’avez pas copié autre chose. Elle agit sur le presse-papiers ; pour annuler un collage déjà effectué dans Notes, utilisez ⌘Z dans Notes.
+**Right-click** the icon to convert a Markdown file, restore the original clipboard, or quit md2notes. Restoration is available only until you copy something else. It restores the clipboard; to undo text already pasted into Notes, use ⌘Z in Notes.
 
-Pour un fichier `.md` ou `.markdown`, vous pouvez aussi utiliser « Ouvrir avec md2notes » dans le Finder. md2notes lit le fichier sans le modifier et place le texte converti dans le presse-papiers. Les fichiers doivent être encodés en UTF-8 et faire moins de 5 Mo.
+For a `.md` or `.markdown` file, you can also choose “Open With → md2notes” in Finder. md2notes reads the file without changing it and places the converted text on the clipboard. Files must use UTF-8 encoding and be no larger than 5 MB.
 
-## Ce qui est conservé
+## Formatting
 
-Le gras, l’italique, les liens, les listes et les tableaux sont conservés pour les contenus HTML/RTF compatibles. Les listes, les cellules de tableau et les blocs de code restent compacts. Les lignes vides déjà présentes ne sont pas doublées.
+Bold, italics, links, lists, and tables are preserved for compatible HTML/RTF content. Lists, table cells, and code blocks stay compact. Existing blank lines are not duplicated.
 
-Le Markdown est détecté automatiquement dans le texte copié, à partir de sa structure : les `#`, `##`, etc. deviennent des titres sans dièses ; `**gras**` et `__gras__` deviennent du gras ; `*italique*` et `_italique_` deviennent de l’italique ; `~~barré~~` devient du texte barré. Les liens directs ou par référence, citations `>`, listes, tableaux et titres soulignés avec `=` ou `-` sont convertis. Les accents graves autour du code disparaissent, mais le contenu du code reste intact. Les listes de tâches utilisent les symboles ☑ et ☐ ; il ne s’agit pas de cases interactives de Notes.
+Markdown is detected automatically from its structure:
 
-Les marqueurs Markdown ne sont pas supprimés aveuglément : `C#`, les hashtags et les dièses échappés restent présents. Le texte brut sans syntaxe Markdown identifiable est simplement aéré.
+- `#`, `##`, and other heading markers become headings without the hash signs.
+- `**bold**` and `__bold__` become bold text.
+- `*italic*` and `_italic_` become italic text.
+- `~~deleted~~` becomes strikethrough text.
+- Direct and reference-style links, blockquotes `>`, lists, tables, and headings underlined with `=` or `-` are converted.
+- Backticks around code are removed while the code itself remains intact.
+- Task lists use ☑ and ☐ symbols, rather than interactive Notes checkboxes.
 
-md2notes modifie l’espace **entre les paragraphes**, pas l’interligne des lignes qui se replient à l’intérieur d’un paragraphe.
+Markdown markers are not removed indiscriminately: `C#`, hashtags, and escaped hash signs remain present. Plain text without recognizable Markdown syntax simply receives paragraph spacing.
 
-## Limites et confidentialité
+md2notes changes spacing **between paragraphs**, not the line spacing within a paragraph that wraps onto multiple lines.
 
-- Les images, médias et pièces jointes ne sont pas transformés. Le presse-papiers reste intact en cas de contenu incompatible.
-- Si vous copiez un nouveau texte pendant la conversion, cette nouvelle copie est conservée.
-- Une conversion réussie remplace le presse-papiers par les versions HTML, RTF et texte brut du résultat ; les formats propres à l’application source sont disponibles via « Restaurer l’original ».
-- Le traitement reste sur votre Mac. Aucune donnée n’est envoyée à un serveur, aucun historique n’est enregistré. L’original est conservé temporairement en mémoire pour permettre sa restauration.
-- Cette application est signée localement, sans notarisation Apple. Elle est construite pour les Mac Intel sous macOS 13 ou ultérieur et a été testée sur le Mac utilisé pour sa création.
+## Limitations and privacy
+
+- Images, media, and attachments are not converted. Unsupported content leaves the clipboard unchanged.
+- If you copy new text during conversion, that new copy is preserved.
+- A successful conversion replaces the clipboard with HTML, RTF, and plain-text versions of the result. Source-specific clipboard formats can be recovered using the restore command.
+- Processing stays on your Mac. No data is sent to a server and no clipboard history is saved. The original clipboard is kept temporarily in memory for restoration.
+- The app is signed locally and is not notarized by Apple. It is built for Intel Macs running macOS 13 or later and has been tested on the Mac used to create it.
 
 ## Validation
 
-Les contrôles couvrent les sauts de paragraphe, la conservation du gras/italique/liens/tableaux dans les sorties HTML et RTF, le code multiligne, les transformations répétées, les changements concurrents et la restauration complète du presse-papiers. Ils vérifient aussi la conversion des titres Markdown, les dièses littéraux et les fichiers `.md` copiés depuis le Finder.
+Automated checks cover paragraph breaks, bold/italic/link/table preservation in HTML and RTF output, multiline code, repeated transformations, concurrent clipboard changes, and full clipboard restoration. They also cover Markdown headings, literal hash signs, and `.md` files copied from Finder.
 
-Version 1.2 : conversion Markdown locale avec Marked 18.1.0, bibliothèque fournie dans l’application sous licence MIT. Aucune bibliothèque n’est téléchargée pendant l’utilisation. Les astérisques utilisés comme multiplication et les underscores dans les noms restent présents : seuls les marqueurs Markdown valides sont convertis.
+Version 1.2 uses Marked 18.1.0 for local Markdown conversion. The library is bundled under its MIT license; nothing is downloaded during use. Asterisks used for multiplication and underscores within names remain present: only valid Markdown syntax is converted.
 
-Le rendu visuel du collage dans Notes Mac et de la note synchronisée sur iPhone reste à confirmer. Pour le vérifier, copiez une réponse contenant deux paragraphes, un titre, une liste et un tableau ; transformez-la avec md2notes, puis collez-la dans une nouvelle note iCloud. Les paragraphes doivent être séparés par une ligne vide et le tableau doit rester utilisable.
+Visual rendering when pasted into Notes on Mac and synced to iPhone still needs confirmation. To check it, copy a response containing two paragraphs, a heading, a list, and a table. Convert it with md2notes, then paste it into a new iCloud note. Paragraphs should have a blank line between them, and the table should remain usable.
