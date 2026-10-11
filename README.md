@@ -19,7 +19,7 @@ Current version: **1.2**. Markdown files must use UTF-8 encoding and be no large
 
 ## Build and test
 
-Requires macOS 13 or later and the Swift/Xcode command-line tools. The current build targets **Intel Macs**. All runtime dependencies are included in the repository.
+Requires macOS 13 or later and the Swift/Xcode command-line tools. The build produces a **universal binary** (Apple Silicon and Intel). All runtime dependencies are included in the repository.
 
 ```sh
 zsh scripts/build.sh

@@ -45,7 +45,7 @@ md2notes changes spacing **between paragraphs**, not the line spacing within a p
 - If you copy new text during conversion, that new copy is preserved.
 - A successful conversion replaces the clipboard with HTML, RTF, and plain-text versions of the result. Source-specific clipboard formats can be recovered using the restore command.
 - Processing stays on your Mac. No data is sent to a server and no clipboard history is saved. The original clipboard is kept temporarily in memory for restoration.
-- The app is signed locally and is not notarized by Apple. It is built for Intel Macs running macOS 13 or later and has been tested on the Mac used to create it.
+- The app is signed locally and is not notarized by Apple. It is a universal app (Apple Silicon and Intel) for macOS 13 or later and has been tested on the Mac used to create it.
 
 ## Validation
 
