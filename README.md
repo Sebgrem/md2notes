@@ -2,6 +2,8 @@
 
 Une petite application Mac pour convertir le Markdown du presse-papiers en texte mis en forme, prêt à coller dans Apple Notes.
 
+Utile pour copier-coller les réponses de **ChatGPT, Claude et d’autres IA** dans Apple Notes, en conservant la mise en forme et des espaces entre les paragraphes.
+
 **Copier → cliquer sur md2notes dans la barre des menus → coller avec ⌘V.**
 
 ## Fonctionnalités
