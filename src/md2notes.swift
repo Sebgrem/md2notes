@@ -1,6 +1,7 @@
 import AppKit
 import WebKit
 import UniformTypeIdentifiers
+import ServiceManagement
 
 enum md2notesError: LocalizedError {
     case message(String)
@@ -171,6 +172,25 @@ final class HTMLTransform: NSObject, WKNavigationDelegate {
     }
 }
 
+enum LoginItem {
+    static let offeredKey = "launchAtLoginOffered"
+    static var isEnabled: Bool { SMAppService.mainApp.status == .enabled }
+    // Inscription automatique au premier lancement uniquement, pour respecter un choix « désactivé » ultérieur
+    static func registerOnFirstLaunch(_ defaults: UserDefaults = .standard) {
+        guard !defaults.bool(forKey: offeredKey) else { return }
+        defaults.set(true, forKey: offeredKey)
+        try? SMAppService.mainApp.register()
+    }
+    static func toggle() throws {
+        let service = SMAppService.mainApp
+        switch service.status {
+        case .enabled: try service.unregister()
+        case .requiresApproval: SMAppService.openSystemSettingsLoginItems()
+        default: try service.register()
+        }
+    }
+}
+
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var status: NSStatusItem!
     private var snapshot: ClipboardSnapshot?
@@ -185,6 +205,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         status.button?.action = #selector(clicked)
         status.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
         setIcon("text.alignleft", tip: "md2notes — cliquer pour aérer le texte copié")
+        LoginItem.registerOnFirstLaunch()
         monitor = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             if let count = self.transformedCount, NSPasteboard.general.changeCount != count {
@@ -296,12 +317,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(file)
         menu.addItem(restore)
         menu.addItem(.separator())
+        let login = NSMenuItem(title: "Ouvrir au démarrage", action: #selector(toggleLaunchAtLogin), keyEquivalent: "")
+        login.target = self
+        login.state = LoginItem.isEnabled ? .on : .off
+        menu.addItem(login)
         let quit = NSMenuItem(title: "Quitter md2notes", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         quit.target = NSApp
         menu.addItem(quit)
         status.menu = menu
         status.button?.performClick(nil)
         status.menu = nil
+    }
+    @objc private func toggleLaunchAtLogin() {
+        do {
+            try LoginItem.toggle()
+            feedback(success: true, message: LoginItem.isEnabled ? "md2notes s’ouvrira au démarrage." : "md2notes ne s’ouvrira plus au démarrage.")
+        } catch { feedback(success: false, message: "Réglage d’ouverture au démarrage impossible : " + error.localizedDescription) }
     }
     @objc private func restoreOriginal() {
         guard let original = snapshot, transformedCount == NSPasteboard.general.changeCount else { return }

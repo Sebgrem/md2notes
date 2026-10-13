@@ -6,7 +6,7 @@ md2notes converts Markdown into formatted text for Notes and adds a blank line b
 
 Open **md2notes.app**. An icon showing text lines appears in your Mac’s menu bar. The app has no main window and does not appear in the Dock.
 
-You can move md2notes.app into your Applications folder. md2notes does not start automatically when you log in.
+You can move md2notes.app into your Applications folder. On its first launch, md2notes adds itself to your login items so it opens automatically when you log in. To change this, right-click the icon and toggle “Ouvrir au démarrage”, or use System Settings → General → Login Items. Once you turn it off, md2notes does not turn it back on.
 
 ## Using md2notes
 
@@ -17,7 +17,7 @@ You can move md2notes.app into your Applications folder. md2notes does not start
 
 In Notes, use a folder in your iCloud account to access the note on your iPhone.
 
-**Right-click** the icon to convert a Markdown file, restore the original clipboard, or quit md2notes. Restoration is available only until you copy something else. It restores the clipboard; to undo text already pasted into Notes, use ⌘Z in Notes.
+**Right-click** the icon to convert a Markdown file, restore the original clipboard, toggle opening at login, or quit md2notes. Restoration is available only until you copy something else. It restores the clipboard; to undo text already pasted into Notes, use ⌘Z in Notes.
 
 For a `.md` or `.markdown` file, you can also choose “Open With → md2notes” in Finder. md2notes reads the file without changing it and places the converted text on the clipboard. Files must use UTF-8 encoding and be no larger than 5 MB.
 
@@ -51,6 +51,6 @@ md2notes changes spacing **between paragraphs**, not the line spacing within a p
 
 Automated checks cover paragraph breaks, bold/italic/link/table preservation in HTML and RTF output, multiline code, repeated transformations, concurrent clipboard changes, and full clipboard restoration. They also cover Markdown headings, literal hash signs, and `.md` files copied from Finder.
 
-Version 1.2 uses Marked 18.1.0 for local Markdown conversion. The library is bundled under its MIT license; nothing is downloaded during use. Asterisks used for multiplication and underscores within names remain present: only valid Markdown syntax is converted.
+Version 1.3 uses Marked 18.1.0 for local Markdown conversion. The library is bundled under its MIT license; nothing is downloaded during use. Asterisks used for multiplication and underscores within names remain present: only valid Markdown syntax is converted.
 
 Visual rendering when pasted into Notes on Mac and synced to iPhone still needs confirmation. To check it, copy a response containing two paragraphs, a heading, a list, and a table. Convert it with md2notes, then paste it into a new iCloud note. Paragraphs should have a blank line between them, and the table should remain usable.

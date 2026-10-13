@@ -11,11 +11,12 @@ Useful for copying and pasting responses from **ChatGPT, Claude, and other AI as
 - Converts headings `#`, bold `**`/`__`, italics `*`/`_`, strikethrough `~~`, links, blockquotes, lists, and tables.
 - Adds a real blank line between paragraphs without duplicating existing spacing.
 - Preserves code block contents and literal characters.
+- Opens automatically at login (set on first launch, toggle from the right-click menu).
 - Reads `.md` or `.markdown` files copied from Finder, opened with the app, or selected through its menu.
 - Restores the original clipboard through the right-click menu until you copy something else.
 - Processes everything locally, with no server and no saved clipboard history.
 
-Current version: **1.2**. Markdown files must use UTF-8 encoding and be no larger than 5 MB. Images and attachments are not converted. Visual rendering in Notes on Mac and iPhone still needs confirmation; automated checks validate the HTML/RTF output and clipboard behavior.
+Current version: **1.3**. Markdown files must use UTF-8 encoding and be no larger than 5 MB. Images and attachments are not converted. Visual rendering in Notes on Mac and iPhone still needs confirmation; automated checks validate the HTML/RTF output and clipboard behavior.
 
 ## Build and test
 

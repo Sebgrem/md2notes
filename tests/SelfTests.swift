@@ -1,4 +1,5 @@
 import AppKit
+import ServiceManagement
 
 enum SelfTests {
     static var checks = 0
@@ -115,6 +116,12 @@ enum SelfTests {
             check(markerBold && markerItalic && markerStrike, "stars underscores strike become RTF formatting")
             let escaped = try html(Markdown.html("\\# Ceci reste littéral"))
             check(escaped.plain.contains("# Ceci reste littéral"), "escaped Markdown hash preserved")
+            let loginDefaults = UserDefaults(suiteName: "md2notes.selftest.login")!
+            defer { loginDefaults.removePersistentDomain(forName: "md2notes.selftest.login") }
+            loginDefaults.set(true, forKey: LoginItem.offeredKey)
+            let loginBefore = SMAppService.mainApp.status
+            LoginItem.registerOnFirstLaunch(loginDefaults)
+            check(SMAppService.mainApp.status == loginBefore, "launch at login not re-registered after first launch")
             let fixtureURL = Bundle.main.url(forResource: "markdown-fixture", withExtension: "md")!
             let fileText = try Markdown.readFile(fixtureURL)
             check(fileText.contains("# Exemple md2notes"), "UTF8 Markdown file input")
